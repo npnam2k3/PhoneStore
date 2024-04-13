@@ -1,0 +1,221 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Poppins",sans-serif;
+    color:#052c65;
+    background-color: #f7f7f7;
+    line-height: 1.6;
+    font-size: 15px;
+    margin: 0;
+    position: relative;
+}
+/* phần nav */
+
+.navbar {
+    border-bottom: 1px solid rgba(255,255,255,.3);
+    transition: all .3s ease-in-out;
+    background-color: white!important;
+}
+
+.bg-body-tertiary {
+    --bs-bg-opacity: 1;
+    background-color: rgb(241, 240, 240)!important;
+}
+
+.nav-link {
+    padding-right: 28px!important;
+    font-weight: 500;
+    color: #052c65!important;
+}
+
+.nav-link:hover {
+    color: #50c594!important;
+}
+
+.active {
+    color: #50c594!important;
+}
+
+.btn-primary {
+    background-color: #50c594;
+    border: 1px solid #50c594 !important;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    color: #50c594!important;
+    background-color: white!important;
+}
+
+.row {
+    position: relative;
+}
+
+.avatar {
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-left: 10px;
+  }
+
+  .notifications {
+    padding: 5px;
+    background-color: #e4e6eb; 
+    height: 40px;
+    width: 40px;
+    text-align: center;
+  }
+
+.navbar-brand {
+  padding: 0!important;
+}
+
+/* Hết phần nav */
+
+/* Phần main */
+.pd-100 {
+    padding-top: 100px;
+}
+
+/* Style the tab */
+.tab {
+  /* float: left; */
+  /* border: 1px solid #ccc; */
+  background-color: #f1f1f1;
+  /* width: 30%; */
+  height: auto;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab a {
+  text-decoration: none;
+  display: block;
+  background-color: inherit;
+  color: black;
+  padding: 22px 16px;
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: left;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* Change background color of buttons on hover */
+.tab a:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current "tab button" class */
+.tab a.active {
+  background-color: #30a5ff;
+}
+
+/* Style the tab content */
+.tabcontent {
+  padding: 0px 12px;
+  /* height: 300px; */
+}
+
+.col-md-2 {
+  padding: 0!important;
+}
+
+main .active {
+  color: #ffffff!important;
+}
+
+.event-tooltip-content {
+  padding: 5px;
+}
+
+.event-tooltip-content:not(:last-child) {
+  border-bottom: 1px solid #ccc;
+}
+
+.dashboard_tk {
+  text-align: center;
+}
+
+.dashboard__content {
+  background-color: white;
+  padding: 30px 10px;
+  border-right: 1px solid rgba(148, 148, 148, 0.2);
+}
+
+.dashboard__content:last-child {
+  border: none;
+}
+
+.dashboard__content i {
+  color: #30a5ff;
+  font-size: 30px;
+}
+
+.card img {
+  height: 100px;
+  object-fit: contain;
+  padding: 10px;
+}
+
+table img {
+  height: 100px;
+  object-fit: cover;
+}
+
+.card__product {
+  min-height: 400px;
+}
+
+.card {
+  height: 100%;
+}
+
+.card-body {
+  height: 30%;
+}
+
+/* CSS form search */
+.input-group-search {
+  display: flex;
+  align-items: center;
+}
+
+.input-search {
+  min-height: 40px;
+  padding: 0 1rem;
+  font-size: 15px;
+  border: 1px solid #50c594;
+  border-radius: 6px 0 0 6px;
+  background-color: transparent;
+}
+
+.button--submit {
+  min-height: 40px;
+  padding: .5em 1em;
+  border: none;
+  color: #fff;
+  border-radius: 0 6px 6px 0;
+  background-color: #50c594;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color .3s ease-in-out;
+}
+
+.button--submit:hover {
+  background-color: #50c594;
+}
+
+.input:focus, .input:focus-visible {
+  border-color: #3898EC;
+  outline: none;
+}
+
+.form-btn {
+  background: #30a5ff;
+
+}
+

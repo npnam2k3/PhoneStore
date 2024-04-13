@@ -1,0 +1,91 @@
+.product__img img {
+  width: 100%;
+  height: 400px;
+  object-fit: contain;
+}
+
+.buy {
+  background: linear-gradient(#f52f32, #e11b1e);
+  border: none;
+  border-radius: 10px;
+  color: #fff;
+  flex-direction: column;
+  height: 60px;
+  width: calc(100% - 50px);
+}
+
+.add-product {
+  background-color: initial;
+  border: 2px solid #e04040;
+  border-radius: 10px;
+  height: 60px;
+  width: 60px;
+  white-space: nowrap;
+}
+
+.add-product i {
+  margin: auto auto;
+}
+
+/* css phần tăng giảm số lượng mua */
+
+.number-control {
+  display: flex;
+  align-items: center;
+}
+
+.number-left::before,
+.number-right::after {
+  content: attr(data-content);
+  background-color: #e11b1e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid e11b1e;
+  width: 20px;
+  color: white;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  padding: 2px;
+  height: 30px;
+}
+
+.number-left::before {
+  content: "-";
+  border-radius: 5px 0 0 5px;
+}
+
+.number-right::after {
+  content: "+";
+  border-radius: 0 5px 5px 0;
+}
+
+.number-quantity {
+  border: 0;
+  width: 50px;
+  height: 30px;
+  border-top: 1px solid #e11b1e;
+  border-bottom: 1px solid #e11b1e;
+  padding: 0 5px;
+  -moz-appearance: textfield;
+  /* Firefox */
+  appearance: textfield;
+  /* Chrome, Safari, Opera */
+}
+
+.number-left:hover::before,
+.number-right:hover::after {
+  background-color: #e11b1e;
+  opacity: 0.8;
+}
+
+/* phần store */
+
+.store a {
+  color: blue !important;
+  text-decoration: underline;
+}
+
+.comment__content {
+  margin-left: 40px;
+}
