@@ -84,25 +84,26 @@
           <hr>
           <div class="product__comment mt-4">
             <h6 class="fw-bold">Đánh giá & nhận xét </h6>
-            <form th:action="@{/comments}" class="form__comment">
-              <textarea name="" id="" cols="30" rows="4" class="form-control" name="comment"
+            <form th:action="@{/comments}" class="form__comment" method="post">
+              <input type="hidden" name="idProduct" th:value="${product.id}">
+              <textarea id="" cols="30" rows="4" class="form-control" name="comment"
                         placeholder="Xin mời quý khách chia sẻ một số cảm nhận về sản phẩm"></textarea>
+              <div id="commentError" class="text-danger"></div>
+              <!-- Kiểm tra và hiển thị button nếu có commentError -->
+              <div th:if="${commentError}" th:text="${commentError}" class="text-danger"></div>
+              <div th:if="${notLogin}" th:text="${notLogin}" class="text-danger"></div>
+              <div th:if="${failed}" th:text="${failed}" class="text-danger"></div>
+              <div th:if="${success}" th:text="${success}" class="text-success"></div>
               <button type="submit" class="btn btn-primary mt-3">Gửi đánh giá</button>
             </form>
           </div>
           <hr>
           <div class="customer__comment">
-            <div class="customer__comment__list mt-4">
-              <span class="d-flex align-items-center"><strong class="fw-bold me-3">Nguyễn Xuân Cường</strong> <span
-                      class="comment__date text-body-secondary">4/4/2024 13:00</span></span>
-              <p class="comment__content mt-2 border rounded p-3"> Sản phẩm rất đáng để mua</p>
-            </div>
-            <div class="customer__comment__list mt-4">
-              <span class="d-flex align-items-center"><strong class="fw-bold me-3">Nguyễn Xuân Cường</strong> <span
-                      class="comment__date text-body-secondary">4/4/2024 13:00</span></span>
-              <p class="comment__content mt-2 border rounded p-3"> Lorem ipsum, dolor sit amet consectetur adipisicing
-                elit. Fugit ut consequatur inventore iure mollitia, earum veniam reiciendis assumenda velit odio
-                delectus exercitationem consequuntur beatae unde enim voluptatibus quidem voluptate laudantium!</p>
+            <p th:if="${#lists.isEmpty(listComment)}" style="text-align: center">Chưa có bình luận nào</p>
+            <div class="customer__comment__list mt-4" th:each="comment: ${listComment}">
+              <span class="d-flex align-items-center"><strong class="fw-bold me-3" th:text="${comment.user.fullname}"></strong> <span
+                      class="comment__date text-body-secondary" th:text="${#dates.format(comment.createdDate, 'dd/MM/yyyy HH:mm')}"></span></span>
+              <p class="comment__content mt-2 border rounded p-3" th:text="${comment.content}"></p>
             </div>
           </div>
           <hr>
@@ -173,6 +174,7 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 <script src="../../js/index.js"></script>
+
 <script>
   function increment() {
     var quantityInput = document.getElementById('quantity');

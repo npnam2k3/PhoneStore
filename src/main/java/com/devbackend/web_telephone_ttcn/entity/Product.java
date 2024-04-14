@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -63,4 +64,7 @@ public class Product {
     @ManyToOne
     @JoinColumn(name = "categoryId",referencedColumnName = "id")
     private Category category;
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL)
+    private List<Comments> comments;
 }

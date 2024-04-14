@@ -51,7 +51,8 @@
 <!--        </div>-->
         <div class="product__list">
             <div class="row" th:if="${!#lists.isEmpty(listProduct)}">
-                <a class="col-md-3 mt-4" th:each="product: ${listProduct}" th:href="@{/productDetail/{id}(id=${product.id})}">
+<!--                <a class="col-md-3 mt-4" th:each="product: ${listProduct}" th:href="@{/productDetail/{id}(id=${product.id})}">-->
+                <a class="col-md-3 mt-4" th:each="product: ${listProduct}" th:href="@{/productDetail(id=${product.id})}">
                     <div class="card card_product">
                         <img th:src="${product.imagePath}" class="card-img-top" alt="...">
                         <div class="card-body">
