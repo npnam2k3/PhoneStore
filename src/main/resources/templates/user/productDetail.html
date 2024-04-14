@@ -84,10 +84,10 @@
           <hr>
           <div class="product__comment mt-4">
             <h6 class="fw-bold">Đánh giá & nhận xét </h6>
-            <form action="" class="form__comment">
-              <textarea name="" id="" cols="30" rows="4" class="form-control"
+            <form th:action="@{/comments}" class="form__comment">
+              <textarea name="" id="" cols="30" rows="4" class="form-control" name="comment"
                         placeholder="Xin mời quý khách chia sẻ một số cảm nhận về sản phẩm"></textarea>
-              <button class="btn btn-primary mt-3">Gửi đánh giá</button>
+              <button type="submit" class="btn btn-primary mt-3">Gửi đánh giá</button>
             </form>
           </div>
           <hr>
