@@ -38,4 +38,12 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.productName like %?1% and p.isDelete=0")
     Page<Product> searchProductAndPageable(String keyword, Pageable pageable);
 
+
+    // thong ke cac san pham sap het hang
+    @Query(value = "select p from Product p where p.isDelete = 0 and p.quantityInStock <= 5")
+    List<Product> getProductsRunningOut();
+
+    // thống kê các san pham tồn kho
+    @Query(value = "select p from Product p where p.isDelete = 0 and p.quantityInStock > 30")
+    List<Product> getProductsInventory();
 }

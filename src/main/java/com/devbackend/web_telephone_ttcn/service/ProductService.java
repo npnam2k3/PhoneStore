@@ -32,4 +32,9 @@ public interface ProductService {
     //phan trang va tim kiem
     Page<Product> searchAndPageable(String keyword, Integer pageNo);
 
+    // cập nhật số lượng sản phẩm sau khi mua hàng
+    void updateQuantityProduct(Long idProduct, int quantityPurchased);
+
+    // cập nhật số lượng sản phẩm sau khi khách hủy đơn hàng
+    void updateQuantityInStock(Long idProduct, int quantity);
 }

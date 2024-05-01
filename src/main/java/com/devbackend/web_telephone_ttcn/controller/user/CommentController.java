@@ -51,8 +51,11 @@ public class CommentController {
 
         if (comment == null || comment.trim().isEmpty()) {
             System.out.println("Bình luận không hợp lệ");
-            model.addAttribute("commentError", "Bình luận không hợp lệ!");
-            return "user/productDetail";
+            redirectAttributes.addAttribute("id", idProduct);
+//            model.addAttribute("commentError", "Bình luận không hợp lệ!");
+            redirectAttributes.addFlashAttribute("commentError", "Bình luận không hợp lệ!");
+//            return "user/productDetail";
+            return "redirect:/productDetail";
         } else {
             if (isLoggedIn()) {
                 Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -72,8 +75,11 @@ public class CommentController {
                 }
             } else {
                 System.out.println("You have to login to comment");
-                model.addAttribute("notLogin", "Bạn cần đăng nhập để bình luận!");
-                return "user/productDetail";
+//                model.addAttribute("notLogin", "Bạn cần đăng nhập để bình luận!");
+//                return "user/productDetail";
+                redirectAttributes.addAttribute("id", idProduct);
+                redirectAttributes.addFlashAttribute("notLogin", "Bạn cần đăng nhập để bình luận!");
+                return "redirect:/productDetail";
             }
         }
     }

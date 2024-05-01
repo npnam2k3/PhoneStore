@@ -15,22 +15,3 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-function onlyOneCheckboxChecked(checkbox) {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(function (cb) {
-        if (cb !== checkbox) {
-            cb.checked = false;
-        }
-    });
-}
-
-// Lắng nghe sự kiện click trên các checkbox
-document.addEventListener('DOMContentLoaded', function () {
-    var checkboxes = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach(function (checkbox) {
-        checkbox.addEventListener('click', function () {
-            onlyOneCheckboxChecked(checkbox);
-        });
-    });
-});

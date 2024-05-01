@@ -25,13 +25,12 @@
     <div class="container">
       <div class="row">
         <div class="tab col-md-2  mt-5">
-          <a href="" class="tablinks">Thống kê</a>
+          <a th:href="@{/admin/home}" class="tablinks">Thống kê</a>
           <a th:href="@{/admin/product}" class="tablinks active">Quản lý sản phẩm</a>
           <a th:href="@{/admin/category}" class="tablinks">Quản lý danh mục</a>
-          <a href="" class="tablinks">Quản lý đơn hàng</a>
+          <a th:href="@{/admin/order/waitingConfirm}" class="tablinks">Quản lý đơn hàng</a>
           <a th:href="@{/admin/user}" class="tablinks">Quản lý khách hàng</a>
           <a th:href="@{/admin/managerComment}" class="tablinks">Quản lý bình luận</a>
-          <a href="" class="tablinks">Danh sách đơn hàng</a>
         </div>
         <div class="col-md-10">
           <div id="dashboard" class="tabcontent mt-5">
@@ -59,7 +58,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Giá</th>
-                    <td th:text="${product.price}"></td>
+                    <td th:text="${#numbers.formatDecimal(product.price,3,'DEFAULT', 0, 'DEFAULT')}+' VNĐ'"></td>
                   </tr>
                   <tr>
                     <th scope="row">Màu sắc</th>

@@ -85,8 +85,22 @@ public class ProductServiceImpl implements ProductService{
     // tim kiem va phan trang
     @Override
     public Page<Product> searchAndPageable(String keyword, Integer pageNo) {
-        Pageable pageable = PageRequest.of(pageNo-1, 2);
+        Pageable pageable = PageRequest.of(pageNo-1, 4);
         return productRepository.searchProductAndPageable(keyword, pageable);
+    }
+
+    @Override
+    public void updateQuantityProduct(Long idProduct, int quantityPurchased) {
+        Product product = productRepository.findById(idProduct).get();
+        product.setQuantityInStock(product.getQuantityInStock() - quantityPurchased);
+        productRepository.save(product);
+    }
+
+    @Override
+    public void updateQuantityInStock(Long idProduct, int quantity) {
+        Product product = productRepository.findById(idProduct).get();
+        product.setQuantityInStock(product.getQuantityInStock() + quantity);
+        productRepository.save(product);
     }
 
 }

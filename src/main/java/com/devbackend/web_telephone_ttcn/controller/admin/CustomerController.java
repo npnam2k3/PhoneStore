@@ -26,10 +26,7 @@ public class CustomerController {
         String username = authentication.getName();
         model.addAttribute("username", username);
     }
-    @GetMapping("/home")
-    public String home(){
-        return "/admin/home";
-    }
+
     @GetMapping("/user")
     public String listUser(Model model, @RequestParam(name = "keyword", required = false) String keyword, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo){
         Page<User> userDto = userService.getAll(pageNo);

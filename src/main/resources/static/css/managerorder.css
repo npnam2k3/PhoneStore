@@ -1,0 +1,28 @@
+.nav-tab {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e7e7e7;
+}
+
+.nav-tab li {
+    list-style: none;
+}
+
+.nav-tab li a {
+    text-decoration: none;
+    display: block;
+    color: black;
+    padding: 10px 43px;
+    border: none;
+    outline: none;
+    text-align: left;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.nav-tab li a.active {
+    background-color: #30a5ff;
+}

@@ -141,6 +141,15 @@ public class UserServiceImpl implements UserService{
         return userRepository.searchUserWithUserRole("ROLE_USER",keyword, pageable);
     }
 
+//    @Override
+//    public boolean checkCartOfUser(Long idUser) {
+//        User user = userRepository.findById(idUser).get();
+//        if(user.getCart() != null){
+//            return true;
+//        }
+//        return false;
+//    }
+
 
     //Chuyển từ entity -> dto
     private UserDto mapToUserDto(User user){

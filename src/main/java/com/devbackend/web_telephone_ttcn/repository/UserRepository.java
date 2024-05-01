@@ -27,4 +27,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
     //phan trang va tim kiem
     @Query("SELECT u FROM User u JOIN u.roles r WHERE r.name = ?1 AND u.username LIKE %?2%")
     Page<User> searchUserWithUserRole(String roleName, String keyword, Pageable pageable);
+
+    // dem tong so luong user trong he thong
+    @Query(value = "SELECT COUNT(u.id) FROM users u JOIN users_roles ur ON u.id = ur.user_id WHERE ur.role_id = ?1", nativeQuery = true)
+    int countUsersByRoleId(Long roleId);
 }

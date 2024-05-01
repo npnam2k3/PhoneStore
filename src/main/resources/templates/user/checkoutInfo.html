@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- css -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/css/category.css}">
+    <link rel="stylesheet" th:href="@{/css/cart.css}">
+    <link rel="stylesheet" th:href="@{css/reponsive.css}">
+    <title>Thông tin mua hàng</title>
+</head>
+
+<body>
+<!-- header -->
+<header th:replace="user/fragmentCilent/headerClient::headerClient"></header>
+<!-- hết phần header -->
+
+<!-- phần main -->
+<main class="cart__container">
+    <div class="mt-4 ">
+        <h5 class="cart__title fw-bold"> Thông tin</h5>
+        <hr>
+    </div>
+    <div class="cart-1 d-flex p-3 rounded boder bg-white mt-4" th:each="item: ${listItem}">
+        <div class="cart__item">
+            <div class="cart__item-img">
+                <img th:src="${item.product.imagePath}" alt="">
+            </div>
+        </div>
+        <div class="cart__content__title">
+            <div>
+                <h6 th:text="${item.product.productName}"></h6>
+            </div>
+            <span class="color-red"><strong class="price-product" th:text="${#numbers.formatDecimal(item.product.price,3,'DEFAULT', 0, 'DEFAULT')}"></strong><strong>VNĐ</strong></span>
+            <div class="mt-1">
+                <span>Số lượng : <span class="color-red" th:text="${item.quantity}"></span></span>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h6>THÔNG TIN NHẬN HÀNG</h6>
+    <div class="rounded boder bg-white mt-2 p-3 ">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+                        type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Nhận tại cửa
+                    hàng</button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+                        type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Giao hàng tận
+                    nơi</button>
+            </li>
+        </ul>
+        <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab"
+                 tabindex="0">
+                <form th:action="@{/checkout/receiveAtStore}" method="post">
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="fullname"
+                                      id="floatingTextarea2Disabled" readonly th:text="${user.fullname}"></textarea>
+                        <label for="floatingTextarea2Disabled">Họ và tên</label>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="phoneNumber"
+                                      id="floatingTextarea2Disabled" readonly th:text="${user.phoneNumber}"></textarea>
+                        <label for="floatingTextarea2Disabled">Số điện thoại</label>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="email"
+                                      id="floatingTextarea2Disabled" readonly th:text="${user.email}"></textarea>
+                        <label for="floatingTextarea2Disabled">Email</label>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="address"
+                                      id="floatingTextarea2Disabled" readonly>Học Viện Nông Nghiệp Việt Nam</textarea>
+                        <label for="floatingTextarea2Disabled">Địa chỉ cửa hàng</label>
+                    </div>
+                    <span class="fs-6 d-block">Tổng tiền tạm tính: <strong
+                            class="color-red total-price"th:text="${#numbers.formatDecimal(totalCheckout,3,'DEFAULT', 0, 'DEFAULT')}"></strong><strong class="color-red">VNĐ</strong></span>
+                    <input type="hidden" name="total-price" th:value="${totalCheckout}">
+                    <button type="submit" class="btn btn-primary mt-2 w-100">Tiếp Tục</button>
+                </form>
+            </div>
+            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab"
+                 tabindex="0">
+                <form th:action="@{/checkout/deliveryAtHome}" method="post" enctype="multipart/form-data">
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="fullname"
+                                      id="floatingTextarea2Disabled" readonly th:text="${user.fullname}"></textarea>
+                        <label for="floatingTextarea2Disabled">Họ và tên</label>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="phoneNumber"
+                                      id="floatingTextarea2Disabled" readonly th:text="${user.phoneNumber}" ></textarea>
+                        <label for="floatingTextarea2Disabled">Số điện thoại</label>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="email"
+                                      id="floatingTextarea2Disabled" readonly th:text="${user.email}"></textarea>
+                        <label for="floatingTextarea2Disabled">Email</label>
+                    </div>
+                    <div class="form-floating mb-3 mt-3">
+                            <textarea class="form-control" placeholder="Leave a comment here" name="address"
+                                      id="floatingTextarea2Disabled" th:text="${user.address}" required></textarea>
+                        <label for="floatingTextarea2Disabled">Địa chỉ người nhận</label>
+                    </div>
+                    <span class="fs-6 d-block">Tổng tiền tạm tính: <strong
+                            class="color-red total-price" th:text="${#numbers.formatDecimal(totalCheckout,3,'DEFAULT', 0, 'DEFAULT')}"></strong><strong class="color-red">VNĐ</strong></span>
+                    <input type="hidden" name="total-price" th:value="${totalCheckout}">
+                    <button type="submit" class="btn btn-primary mt-2 w-100">Tiếp Tục</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+<!-- hết phần main -->
+
+
+<!-- back-top -->
+<div id="back-top" style="opacity: 1;">
+    <i class="fa-solid fa-angles-up"></i>
+</div>
+<!-- hết back-top -->
+</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+<script th:src="@{/js/index.js}"></script>
+
+<script>
+    // function updateTotalPrice() {
+    //     var totalProducts = document.querySelectorAll('.price-product');
+    //     var total = 0;
+    //     for (var i = 0; i < totalProducts.length; i++) {
+    //         total += parseInt(totalProducts[i].textContent);
+    //     }
+    //     var totalPriceElements = document.querySelectorAll('.total-price');
+    //     totalPriceElements.forEach(function (totalPriceElement) {
+    //         totalPriceElement.textContent = total;
+    //     });
+    //     var totalPriceInputs = document.querySelectorAll('input[name="total-price"]');
+    //     totalPriceInputs.forEach(function (totalPriceInput) {
+    //         totalPriceInput.value = total;
+    //     });
+    // }
+
+
+    // updateTotalPrice();
+</script>
+
+</html>

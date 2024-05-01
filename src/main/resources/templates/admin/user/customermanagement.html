@@ -27,13 +27,12 @@
             <div class="row d-flex">
 <!--                <div th:replace="fragment/menu::menu"></div>-->
                 <div class="tab col-md-2  mt-5">
-                    <a href="" class="tablinks">Thống kê</a>
+                    <a th:href="@{/admin/home}" class="tablinks">Thống kê</a>
                     <a th:href="@{/admin/product}" class="tablinks">Quản lý sản phẩm</a>
                     <a th:href="@{/admin/category}" class="tablinks">Quản lý danh mục</a>
-                    <a href="" class="tablinks">Quản lý đơn hàng</a>
+                    <a th:href="@{/admin/order/waitingConfirm}" class="tablinks">Quản lý đơn hàng</a>
                     <a th:href="@{/admin/user}" class="tablinks active">Quản lý khách hàng</a>
                     <a th:href="@{/admin/managerComment}" class="tablinks">Quản lý bình luận</a>
-                    <a href="" class="tablinks">Danh sách đơn hàng</a>
                 </div>
                 <div class="col-md-10  mt-5">
                     <div id="dashboard" class="tabcontent">

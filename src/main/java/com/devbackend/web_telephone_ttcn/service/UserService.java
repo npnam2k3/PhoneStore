@@ -31,4 +31,6 @@ public interface UserService {
 
     //phan trang va tim kiem
     Page<User> searchAndPage(String keyword, Integer pageNo);
+
+//    boolean checkCartOfUser(Long idUser);
 }

@@ -2,11 +2,15 @@ package com.devbackend.web_telephone_ttcn.controller.user;
 
 import com.devbackend.web_telephone_ttcn.dto.CategoryDto;
 import com.devbackend.web_telephone_ttcn.dto.UserDto;
+import com.devbackend.web_telephone_ttcn.entity.Cart;
+import com.devbackend.web_telephone_ttcn.entity.CartItem;
 import com.devbackend.web_telephone_ttcn.entity.Product;
 import com.devbackend.web_telephone_ttcn.entity.User;
+import com.devbackend.web_telephone_ttcn.service.CartService;
 import com.devbackend.web_telephone_ttcn.service.CategoryService;
 import com.devbackend.web_telephone_ttcn.service.ProductService;
 import com.devbackend.web_telephone_ttcn.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,11 +32,27 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CartService cartService;
+
     @ModelAttribute
-    public void addLoggedInUser(Model model) {
+    public void addLoggedInUser(Model model, HttpSession session) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
         model.addAttribute("username", username);
+
+        // lay so luong trong gio hang ghi vao session
+        User user = userService.findUserByUsername(username);
+        if(user!=null){
+            Cart cart = cartService.findByUserId(user.getId());
+            if (cart != null) {
+                List<CartItem> list = cartService.getListCartItemByCartId(cart.getId());
+                if(!list.isEmpty()){
+                    int quantityCartItemInCart = list.size();
+                    session.setAttribute("quantityCartItem", quantityCartItemInCart);
+                }
+            }
+        }
     }
 
     @GetMapping("/")

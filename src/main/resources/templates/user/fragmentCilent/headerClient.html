@@ -10,7 +10,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-between align-items-center">
                     <li class="nav-item">
-                        <form class="d-flex nav-link" role="search">
+                        <form th:action="@{/product/search}" class="d-flex nav-link" role="search" method="get">
                             <div class="group">
                                 <svg class="icon" aria-hidden="true" viewBox="0 0 24 24">
                                     <g>
@@ -19,12 +19,12 @@
                                         </path>
                                     </g>
                                 </svg>
-                                <input placeholder="Search" type="search" class="input">
+                                <input placeholder="Search" type="search" name="keyword" class="input">
                             </div>
                         </form>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                        <a class="nav-link d-flex align-items-center">
                             <div class="box-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 30.83 30.94" width="24"
                                      height="24">
@@ -44,7 +44,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                        <a class="nav-link d-flex align-items-center" th:href="@{/order/orderOfCustomer}" sec:authorize="isAuthenticated()">
                             <div class="box-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44.22 25.85" height="24">
                                     <defs>
@@ -90,13 +90,12 @@
                                     </g>
                                 </svg>
                             </div>
-                            <p>Tra cứu <br>
-                                đơn hàng
+                            <p>Đơn hàng
                             </p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link d-flex align-items-center" href="#">
+                        <a class="nav-link d-flex align-items-center" th:href="@{/cart/showCart}" sec:authorize="isAuthenticated()">
                             <div class="box-icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28.95 35.07" width="25"
                                      height="25">
@@ -113,6 +112,7 @@
                                         </g>
                                     </g>
                                 </svg>
+                                <span id="items_in_cart" th:text="${session.quantityCartItem}"></span>
                             </div>
                             <p>Giỏ hàng</p>
                         </a>
@@ -151,13 +151,13 @@
                                         bạn</a>
                                 </li>
                                 <li>
-                                    <a class="dropdown-item text-dark" href="#">Lịch sử mua hàng</a>
+                                    <a class="dropdown-item text-dark" th:href="@{/order/historyPurchased}">Lịch sử mua hàng</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">
                                 </li>
                                 <li>
-                                    <a class="dropdown-item text-dark" href="/logout">Đămg xuất</a>
+                                    <a class="dropdown-item text-dark" href="/logout">Đăng xuất</a>
                                 </li>
                             </ul>
                         </li>

@@ -1,0 +1,42 @@
+.cart__container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.cart__title {
+    text-align: center;
+}
+
+.cart__item img {
+    width: 150px;
+    height: auto;
+}
+
+.cart__content__title {
+    width: 200px;
+}
+
+.remove__item {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+}
+
+.btn-buy:disabled,
+.btn-delete-item:disabled {
+    cursor:not-allowed ;
+}
+
+p {
+    margin: 0;
+}
+
+#stickyBottomBar+.clear {
+    padding-top: 100px;
+}
+
+.cart-1 {
+    width: 100%;
+}
