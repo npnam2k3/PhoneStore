@@ -331,3 +331,7 @@ table {
     scale: 1.1;
     transition: all 0.3s ease-in-out;
 }
+
+.pd-t{
+    padding-top: 90px;
+}
