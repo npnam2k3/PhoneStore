@@ -22,4 +22,14 @@ public class InformationController {
     public String warrantyPolicy(){
         return "user/warrantyPolicy";
     }
+
+    @GetMapping("/aboutMe")
+    public String aboutMe(){
+        return "user/aboutMe";
+    }
+
+    @GetMapping("/contact")
+    public String contact(){
+        return "user/contact";
+    }
 }

@@ -29,7 +29,8 @@ public class CategoryClientController {
     }
     @GetMapping("allCategory")
     public String allCategory(Model model, @RequestParam(name = "pageNo", defaultValue = "1") Integer pageNo){
-        List<CategoryDto> categoryDtoList = categoryService.findAll();
+        List<CategoryDto> categoryDtoList = categoryService.getAll();
+
         model.addAttribute("listCategory", categoryDtoList);
 
 //        List<Product> productList = productService.findAll();
@@ -44,7 +45,11 @@ public class CategoryClientController {
         CategoryDto categoryDto = categoryService.findById(idCategory);
         model.addAttribute("category", categoryDto);
         List<Product> list = productService.getListProductByCategoryId(idCategory);
-        model.addAttribute("listProduct", list);
+        if(list.isEmpty()){
+            model.addAttribute("listProductEmpty", "Không có sản phẩm");
+        }else {
+            model.addAttribute("listProduct", list);
+        }
         return "user/listProductByCategory";
     }
 }

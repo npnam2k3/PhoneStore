@@ -4,6 +4,7 @@ import com.devbackend.web_telephone_ttcn.dto.CategoryDto;
 import com.devbackend.web_telephone_ttcn.entity.Category;
 import com.devbackend.web_telephone_ttcn.repository.CategoryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -35,8 +36,15 @@ public class CategoryServiceImpl implements CategoryService{
         }
     }
 
+    // chi lay ra 5 danh muc de hien thi len trang chu
     @Override
     public List<CategoryDto> findAll() {
+        List<Category> list = categoryRepository.getAll(PageRequest.of(0,5));
+        return list.stream().map((category) -> maptoDto(category)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CategoryDto> getAll() {
         List<Category> list = categoryRepository.getAll();
         return list.stream().map((category) -> maptoDto(category)).collect(Collectors.toList());
     }

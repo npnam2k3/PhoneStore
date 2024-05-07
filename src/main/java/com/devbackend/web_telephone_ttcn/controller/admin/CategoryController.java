@@ -27,7 +27,7 @@ public class CategoryController {
 
     @GetMapping("/category")
     public String category(Model model, @Param("keyword") String keyword) {
-        List<CategoryDto> categoryDto = categoryService.findAll();
+        List<CategoryDto> categoryDto = categoryService.getAll();
         if(keyword!=null && !keyword.isEmpty()){
             categoryDto = categoryService.searchCategory(keyword);
         }

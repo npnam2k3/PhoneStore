@@ -8,7 +8,11 @@ import java.util.List;
 
 public interface CategoryService {
     void saveCategory(CategoryDto categoryDto);
+    // lay 5 danh mục hiển thi lên trang chủ
     List<CategoryDto> findAll();
+
+    // lấy tất cả danh mục
+    List<CategoryDto> getAll();
     CategoryDto findById(Long id);
     Category getById(Long id);
     boolean deleteCategory(Long id);
