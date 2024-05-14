@@ -1,0 +1,17 @@
+.product__input {
+    position: relative;
+}
+
+.input__range {
+    position: absolute;
+    top: 15px;
+    z-index: 10;
+    background-color: white;
+    width: 350px;
+    box-shadow:  7px 7px 14px #d6d6d6,
+    -7px -7px 14px #ffffff;
+}
+
+.price__input {
+    cursor: pointer;
+}

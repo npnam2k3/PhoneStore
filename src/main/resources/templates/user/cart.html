@@ -59,6 +59,7 @@
                         <div class="number-left" th:onclick="'decrement(event, ' + ${item.id} + ')'"></div>
                         <input type="number" name="number" th:value="${item.quantity}" class="number-quantity" readonly="readonly">
                         <div class="number-right" th:onclick="'increment(event, ' + ${item.id} + ')'"></div>
+                        <input type="hidden" class="warehouse-quantity" th:value="${item.product.quantityInStock}">
                     </div>
                 </div>
             </div>
@@ -74,7 +75,7 @@
                             VNĐ</strong></span>
                </div>
                <div>
-                   <input type="hidden" name="total-price">
+                   <input type="hidden" id="total-price-hidden" name="total-price">
                    <button class="btn btn-primary btn-buy">Mua ngay</button>
                </div>
            </div>
@@ -99,98 +100,16 @@
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 <script th:src="@{/js/index.js}"></script>
-<!--<script>
 
-    function increment(event) {
-        var quantityInput = event.target.parentNode.querySelector('.number-quantity');
-        var currentValue = parseInt(quantityInput.value);
-
-        if (currentValue >= 10) {
-            alert('Số lượng tối đa là 10');
-            return;
-        }
-
-        quantityInput.value = currentValue + 1;
-
-        var priceProduct = event.target.parentNode.parentNode.previousElementSibling.querySelector('.price-product');
-        var originalPrice = parseInt(priceProduct.dataset.originalPrice);
-        priceProduct.textContent = originalPrice * (currentValue + 1);
-
-        updateTotalPrice();
-    }
-
-    function decrement(event) {
-        var quantityInput = event.target.parentNode.querySelector('.number-quantity');
-        var currentValue = parseInt(quantityInput.value);
-
-        if (currentValue > 1) {
-            quantityInput.value = currentValue - 1;
-
-            var priceProduct = event.target.parentNode.parentNode.previousElementSibling.querySelector('.price-product');
-            var originalPrice = parseInt(priceProduct.dataset.originalPrice);
-            priceProduct.textContent = originalPrice * (currentValue - 1);
-
-            updateTotalPrice();
-        }
-    }
-    var checkAll = document.getElementById('checkAll');
-    checkAll.addEventListener('change', function () {
-        var checkboxes = document.getElementsByClassName('checkbox-item');
-        for (var i = 0; i < checkboxes.length; i++) {
-            checkboxes[i].checked = this.checked;
-        }
-        updateTotalPrice();
-        updateButtons();
-    });
-
-    var checkboxes = document.getElementsByClassName('checkbox-item');
-    for (var i = 0; i < checkboxes.length; i++) {
-        checkboxes[i].addEventListener('change', function () {
-            checkAll.checked = Array.from(checkboxes).every(c => c.checked);
-            updateTotalPrice();
-            updateButtons();
-        });
-    }
-
-
-    // function updateTotalPrice() {
-    //     var total = 0;
-    //     var checkedItems = document.querySelectorAll('.checkbox-item:checked');
-    //     for (var i = 0; i < checkedItems.length; i++) {
-    //         var cart = checkedItems[i].closest('.cart-1');
-    //         var priceSpan = cart.querySelector('.price-product');
-    //         var priceText = priceSpan.textContent.trim().split(' ')[0]; // Lấy phần giá trị số từ chuỗi
-    //         var price = parseInt(priceText.replace(/\D/g, '')); // Xóa tất cả các ký tự không phải số
-    //         total += price;
-    //     }
-    //     document.querySelector('.total-price').textContent = total.toLocaleString() + ' VNĐ'; // Hiển thị tổng tiền với định dạng
-    //     document.querySelector('input[name="total-price"]').value = total; // Cập nhật giá trị tổng tiền ẩn
-    // }
-
-
-    function updateButtons() {
-        var checkedItems = document.querySelectorAll('.checkbox-item:checked');
-        var buyButton = document.querySelector('.btn.btn-buy');
-        var removeButton = document.querySelector('.btn.btn-delete-item');
-        if (checkedItems.length > 0) {
-            buyButton.disabled = false;
-            removeButton.disabled = false;
-        } else {
-            buyButton.disabled = true;
-            removeButton.disabled = true;
-        }
-    }
-
-    updateButtons();
-
-</script>-->
 <script>
-    function increment(even,cartItemId) {
+    function increment(event,cartItemId) {
         var quantityInput = event.target.parentNode.querySelector('.number-quantity');
         var currentValue = parseInt(quantityInput.value);
 
-        if (currentValue >= 5) {
-            alert('Số lượng tối đa là 5');
+        var warehouseQuantity = parseInt(event.target.parentNode.querySelector('.warehouse-quantity').value)
+        console.log(warehouseQuantity)
+        if (currentValue >= warehouseQuantity) {
+            alert('Số lượng trong kho chỉ còn '+warehouseQuantity+' sản phẩm');
             return;
         }
 
@@ -210,7 +129,7 @@
         updateTotalPrice();
     }
 
-    function decrement(even, cartItemId) {
+    function decrement(event, cartItemId) {
         var quantityInput = event.target.parentNode.querySelector('.number-quantity');
         var currentValue = parseInt(quantityInput.value);
 
@@ -261,7 +180,7 @@
             total += parseInt(price);
         }
         document.querySelector('.total-price').textContent = total.toLocaleString('vi-VN');
-        document.querySelector('input[type="hidden"]').value = total;
+        document.querySelector('#total-price-hidden').value = total;
     }
 
     function updateButtons() {

@@ -12,6 +12,9 @@
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <link rel="stylesheet" th:href="@{/css/category.css}">
     <link rel="stylesheet" th:href="@{/css/reponsive.css}">
+    <link rel="stylesheet" th:href="@{/css/listProductByCategory.css}">
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/css/ion.rangeSlider.min.css" />
 
     <title>Danh sách sản phẩm theo danh mục</title>
 </head>
@@ -35,20 +38,23 @@
 <!-- phần main -->
 <main>
     <div class="container product mt-4 p-4 bg-white rounded-3">
+
+        <h5 class="fw-bold">Sắp xếp theo</h5>
+        <div class="product__input mt-3">
+            <div class="price__input">
+                <span class="rounded px-3 py-2 border">Giá <i class="fa-solid fa-angle-down"></i></span>
+            </div>
+            <form th:action="@{/filterByPrice}" method="post" id="myForm" class="input__range">
+                <div class="input__range rounded px-5 py-4 border">
+                    <input type="text" id="rangeSlider">
+                    <input type="hidden" id="rangeValue1" name="rangeValue1">
+                    <input type="hidden" id="rangeValue2" name="rangeValue2">
+                    <input type="hidden" th:value="${category.id}" name="idCategory">
+                    <button class="btn btn-primary mt-2" type="submit">Lọc kết quả</button>
+                </div>
+            </form>
+        </div>
         <p class="text-center" th:text="${listProductEmpty}"></p>
-<!--        <h5 class="fw-bold">Sắp xếp theo</h5>-->
-<!--        <div class="product__input">-->
-<!--            <form action="" class="d-flex align-items-center">-->
-<!--                <label for="high-low" class="d-flex align-items-center me-3">-->
-<!--                    <input type="checkbox" id="high-low" class="me-2">-->
-<!--                    Giá cao-thấp-->
-<!--                </label>-->
-<!--                <label for="low-high" class="d-flex align-items-center">-->
-<!--                    <input type="checkbox" id="low-high" class="me-2">-->
-<!--                    Giá thấp-cao-->
-<!--                </label>-->
-<!--            </form>-->
-<!--        </div>-->
         <div class="product__list" th:if="${!#lists.isEmpty(listProduct)}">
             <div class="row">
                 <a class="col-md-3 mt-4" th:each="product: ${listProduct}" th:href="@{/productDetail(id=${product.id})}">
@@ -85,16 +91,47 @@
     <div class="container">
         <div class="row text-center">
             <div class="col-lg-12">
-                <span class="text-muted">2023 © by <a href="#" class="text-muted">CNTPhone</a></span>
+                <span class="text-muted">2023 © by <a th:href="@{/}" class="text-muted">CNTPhone</a></span>
             </div>
         </div>
     </div>
 </div>
 <!-- hết footer 2 -->
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
         crossorigin="anonymous"></script>
 <script th:src="@{/js/index.js}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ion-rangeslider/2.3.1/js/ion.rangeSlider.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Initially hide the range slider
+        $('.input__range').hide();
+
+        // Toggle the visibility of the range slider when the price is clicked
+        $('.product__input div span').click(function () {
+            $('.input__range').toggle();
+        });
+
+        var $range = $("#rangeSlider").ionRangeSlider({
+            type: "double",
+            min: 0,
+            max: 50000000,
+            from: 0,
+            to: 50000000,
+            step: 1000000
+        });
+
+        var slider = $range.data("ionRangeSlider");
+
+        $('#myForm').on('submit', function (e) {
+            var from = slider.result.from;
+            var to = slider.result.to;
+            $('#rangeValue1').val(from);
+            $('#rangeValue2').val(to);
+        });
+    });
+</script>
 
 </html>

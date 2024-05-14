@@ -62,4 +62,33 @@ public class ProductClientController {
         model.addAttribute("listProduct", products);
         return "user/search";
     }
+
+    // loc theo gia san pham
+    @PostMapping("/filterByPrice")
+    public String filterByPrice(@RequestParam("rangeValue1") String rangeValue1,
+                                @RequestParam("rangeValue2") String rangeValue2,
+                                @RequestParam("idCategory") String idCategoryStr,
+                                Model model){
+        Long rangeStart = -1L;
+        Long rangeEnd = -1L;
+        Long idCategory = -1L;
+        try {
+            rangeStart = Long.parseLong(rangeValue1);
+            rangeEnd = Long.parseLong(rangeValue2);
+            idCategory = Long.parseLong(idCategoryStr);
+        }catch (NumberFormatException e){
+            e.printStackTrace();
+        }
+        CategoryDto categoryDto = categoryService.findById(idCategory);
+        model.addAttribute("category", categoryDto);
+        List<Product> listProduct = productService.filterListProductByPrice(rangeStart, rangeEnd, idCategory);
+        if(listProduct.isEmpty()){
+            model.addAttribute("listProductEmpty", "Không có sản phẩm nào");
+        }else {
+            model.addAttribute("listProduct", listProduct);
+        }
+        System.out.println(rangeValue1);
+        System.out.println(rangeValue2);
+        return "user/listProductByCategory";
+    }
 }

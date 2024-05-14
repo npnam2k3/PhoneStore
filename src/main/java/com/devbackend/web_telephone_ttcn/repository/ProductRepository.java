@@ -18,6 +18,10 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     @Query("select p from Product p where p.category.id = ?1 and p.isDelete = 0")
     List<Product> getListProductByCategoryId(Long id);
 
+    // loc san pham theo gia cua tung danh muc
+    @Query("select p from Product p where (p.price between ?1 and ?2) and p.category.id = ?3 and p.isDelete = 0")
+    List<Product> filterListProductByPrice(Long rangeStart, Long rangeEnd, Long id);
+
     // lấy ra danh sách sản phẩm theo id danh mục va phan trang
     @Query("select p from Product p where p.category.id = ?1 and p.isDelete = 0")
     Page<Product> getListProductByCategoryIdAndPageable(Long id, Pageable pageable);

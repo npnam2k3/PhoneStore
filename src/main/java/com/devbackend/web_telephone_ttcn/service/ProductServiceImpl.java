@@ -103,4 +103,9 @@ public class ProductServiceImpl implements ProductService{
         productRepository.save(product);
     }
 
+    @Override
+    public List<Product> filterListProductByPrice(Long rangeStart, Long rangeEnd, Long id) {
+        return productRepository.filterListProductByPrice(rangeStart, rangeEnd, id);
+    }
+
 }

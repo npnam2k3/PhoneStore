@@ -67,9 +67,9 @@
 #custom-alert {
   display: block;
   position: fixed;
-  top: 30px;
-  right: 0;
-  transform: translate(-50%, -50%);
+  top: 80px;
+  right: 50%;
+  /*transform: translate(-50%, -50%);*/
   transition: all 0.3s ease-in-out;
   z-index: 1000;
   background-color: #ffffff;

@@ -37,4 +37,7 @@ public interface ProductService {
 
     // cập nhật số lượng sản phẩm sau khi khách hủy đơn hàng
     void updateQuantityInStock(Long idProduct, int quantity);
+
+    // loc san pham theo gia cua tung danh muc
+    List<Product> filterListProductByPrice(Long rangeStart, Long rangeEnd, Long id);
 }

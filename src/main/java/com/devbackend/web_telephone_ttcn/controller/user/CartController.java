@@ -166,17 +166,7 @@ public class CartController {
         CartItem cartItem = cartService.getCartItemById(idCartItem);
         cartService.updateCartItem(idCartItem, newQuantity);
         return "redirect:/cart/showCart";
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        String username = authentication.getName();
-//        User user = userService.findUserByUsername(username);
-//        Cart cart = cartService.findByUserId(user.getId());
-//        if(cart == null){
-//            model.addAttribute("cartEmpty", "Giỏ hàng của bạn trống");
-//        }else{
-//            List<CartItem> list = cartService.getListCartItemByCartId(cart.getId());
-//            model.addAttribute("list", list);
-//        }
-//        return "user/cart";
+
     }
 
     @GetMapping("/deleteCartItem/{id}")
@@ -250,7 +240,7 @@ public class CartController {
                         return "redirect:/cart/showCart";
                     } else {
                         System.out.println("Không thể thêm vào giỏ hàng");
-                        redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra!");
+//                        redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra!");
                         return "redirect:/productDetail";
                     }
                 }
@@ -265,7 +255,7 @@ public class CartController {
                     return "redirect:/cart/showCart";
                 } else {
                     System.out.println("Không thể thêm vào giỏ hàng");
-                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra!");
+//                    redirectAttributes.addFlashAttribute("error", "Có lỗi xảy ra!");
                     return "redirect:/productDetail";
                 }
             }
